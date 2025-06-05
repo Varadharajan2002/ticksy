@@ -1,0 +1,373 @@
+.time-picker {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.6;
+  }
+
+  label {
+    color: #000;
+    margin-left: 0.5rem;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.75rem;
+    margin-bottom: 0;
+    text-transform: capitalize;
+
+    .required {
+      color: #B91826;
+    }
+  }
+
+  .time-input-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+  }
+
+  .time-input {
+    width: 100%;
+    height: 40px;
+    border-radius: 0.75rem;
+    background: #ececec;
+    color: #000;
+    border: none;
+    outline: none;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.75;
+    padding: 0.25rem 1rem;
+    padding-right: 3.5rem;
+    box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+
+  /* Clock styling */
+  .clock-container {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    width: 280px;
+    height: 280px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    
+    // Prevent text selection for entire clock container
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-touch-callout: none;
+  }
+
+  .clock-header {
+    // Background color will be set dynamically via CSS custom properties
+    color: #000;
+    padding: 8px;
+    text-align: center;
+    background-color: var(--clock-color, #ebe30d);
+  }
+
+  .clock-time-display {
+    font-size: 1.5rem;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+
+    .clock-separator {
+      color: #fff;
+    }
+
+    .clock-hours,
+    .clock-minutes {
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 4px;
+      color: #fff;
+      -webkit-tap-highlight-color: transparent;
+
+      &.active {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+      }
+    }
+
+    .clock-period {
+      margin-left: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 4px;
+      color: #fff;
+      -webkit-tap-highlight-color: transparent;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+      }
+    }
+  }
+
+  .clock-face {
+    position: relative;
+    width: 190px;
+    height: 180px;
+    margin-left: 3rem;
+    margin-top: 1rem;
+    border-radius: 50%;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    
+    // Prevent text selection during drag
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    
+    // Prevent touch callout on mobile
+    -webkit-touch-callout: none;
+    
+    // Prevent drag and drop
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+
+    // Disable touch actions for better drag handling
+    touch-action: none;
+  }
+
+  .clock-center {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: var(--clock-color, #ebe30d);
+    border-radius: 50%;
+    z-index: 2;
+  }
+
+ .clock-hand {
+  position: absolute;
+  height: 1.5px;
+  background-color: var(--clock-color, #ebe30d);
+  transform-origin: 0% 50%;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+
+  &::after {
+    content: '';
+    position: absolute;
+    right: -4px;
+    top: -4px;
+    width: 10px;
+    height: 10px;
+    background-color: inherit;
+    border-radius: 50%;
+  }
+
+  // Smaller tip for 24-hour mode when selecting hours
+  &.hour-hand-24::after {
+    width: 8px;
+    height: 8px;
+    right: -3px;
+    top: -3px;
+  }
+}
+
+  .clock-number {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    font-size: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate(-50%, -50%);
+    background-color: transparent;
+    color: #000;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    
+    // Prevent text selection
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    
+    // Prevent touch callout on mobile
+    -webkit-touch-callout: none;
+
+    &:hover {
+      background-color: rgba(235, 227, 13, 0.2);
+    }
+
+    &.selected {
+      background-color: var(--clock-color, #ebe30d);
+      color: #fff;
+      font-weight: 500;
+    }
+  }
+
+  .clock-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 8px 16px 16px;
+    gap: 8px;
+
+    button {
+      background: none;
+      border: none;
+      padding: 8px 16px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 4px;
+      text-transform: uppercase;
+      -webkit-tap-highlight-color: transparent;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+      }
+    }
+
+    .clock-ok {
+      color: var(--clock-color, #ebe30d);
+    }
+
+    .clock-cancel {
+      color: #666;
+    }
+  }
+
+  .react-date-picker {
+    width: 100%;
+    height: 40px;
+    border-radius: 0.75rem;
+    background: #ececec;
+    color: #000;
+    border: none;
+    outline: none;
+    font-family: "Clash Grotesk Variable";
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.75;
+    padding: 0.25rem 1rem;
+    box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+
+    &__wrapper {
+      border: none;
+      display: flex;
+      align-items: center;
+    }
+
+    &__inputGroup__input {
+      color: #000;
+      font-size: 16px;
+      border: none;
+      outline: none;
+    }
+
+    &__button {
+      width: 22px;
+      height: 22px;
+      background-image: url('../../assets/svg/CalendarBlank.svg');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+
+      svg {
+        display: none;
+      }
+    }
+  }
+
+  .react-calendar {
+    max-width: 320px !important;
+    border-radius: 0.75rem;
+    background: #ececec;
+    color: #000;
+    border: none;
+    outline: none;
+    font-family: "Clash Grotesk Variable" !important;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.75;
+    padding: 0.25rem 1rem;
+    box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+
+    &__tile {
+      padding: 5px 0.6667px;
+
+      &:hover {
+        background: #ddd;
+      }
+
+      &--active {
+        background: #ebe30d;
+        color: #000;
+      }
+    }
+  }
+
+  .error-message {
+    display: block;
+    margin-top: 4px;
+    margin-left: 8px;
+    color: #B91826;
+    font-size: 1rem;
+    font-weight: 450;
+  }
+}
+
+.clock-number.inner-number {
+  width: 14px; // Reduced from 16px for better spacing
+  height: 14px;
+  font-size: 0.6rem; // Smaller font
+  border: 1px solid #e0e0e0; // Lighter border
+  font-weight: 500;
+}
+
+.clock-number.outer-number {
+  width: 20px;
+  height: 20px;
+  font-size: 0.75rem;
+  border: 1px solid #ccc;
+}
+
+// Add some breathing room in 24-hour mode
+.clock-face.clock-24hour {
+  .clock-number.inner-number {
+    margin: 1px; // Add small margin for spacing
+  }
+}
