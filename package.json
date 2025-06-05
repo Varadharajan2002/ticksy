@@ -33,7 +33,7 @@
     "ui",
     "form"
   ],
-  "author": "Your Name <your.email@example.com>",
+  "author": "Varadharajan <varadharajan025@gmail.com>",
   "license": "MIT",
   "peerDependencies": {
     "react": ">=16.8.0",
@@ -52,10 +52,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/Ticksy.git"
+    "url": "https://github.com/varadharajan2002/ticksy.git"
   },
-  "homepage": "https://github.com/yourusername/Ticksy#readme",
+  "homepage": "https://github.com/varadharajan2002/ticksy#readme",
   "bugs": {
-    "url": "https://github.com/yourusername/Ticksy/issues"
+    "url": "https://github.com/varadharajan2002/ticksy/issues"
+  },
+  "dependencies": {
+    "path": "^0.12.7",
+    "ticksy": "^1.0.0",
+    "url": "^0.11.4"
   }
 }
