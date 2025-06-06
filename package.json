@@ -1,6 +1,6 @@
 {
   "name": "ticksy",
-  "version": "1.0.0",
+  "version": "1.0.8",
   "description": "A customizable React time picker component with analog clock interface",
   "main": "dist/index.umd.js",
   "module": "dist/index.esm.js",
@@ -52,15 +52,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/varadharajan2002/ticksy.git"
+    "url": "git+https://github.com/varadharajan2002/ticksy.git"
   },
   "homepage": "https://github.com/varadharajan2002/ticksy#readme",
   "bugs": {
     "url": "https://github.com/varadharajan2002/ticksy/issues"
-  },
-  "dependencies": {
-    "path": "^0.12.7",
-    "ticksy": "^1.0.0",
-    "url": "^0.11.4"
   }
 }

@@ -16,10 +16,9 @@ const [timeValue, setTimeValue] = useState("12:00");
       <TimePicker
         value={timeValue}
         onChange={handleTimeChange}
-        color="red"
         use24Hour={true}
         label="Select Time"
-        placeholder="Choose your time"
+        placeholder="Choose your time" 
         // Optional props you can use:
         disabled={false}
         // error={false}
